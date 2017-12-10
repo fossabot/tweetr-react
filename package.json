@@ -24,6 +24,7 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "semantic-ui-react": "^0.77.0",
     "tslib": "^1.8.1"
   }
 }
