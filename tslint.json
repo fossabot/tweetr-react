@@ -1,0 +1,25 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "interface-name": false,
+    "member-ordering": false,
+    "one-variable-per-declaration": false,
+    "max-line-length": false,
+    "max-classes-per-file": false,
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "onespace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ]
+  },
+  "rulesDirectory": []
+}
