@@ -7,7 +7,7 @@
   "author": "michaelneu",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "build": "webpack -p",
     "lint": "tslint --project .",
     "clean": "rimraf dist/"
