@@ -8,14 +8,16 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
-    "lint": "tslint --project ."
+    "build": "webpack -p",
+    "lint": "tslint --project .",
+    "clean": "rimraf dist/"
   },
   "devDependencies": {
     "@types/react": "^16.0.28",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
     "awesome-typescript-loader": "^3.4.1",
+    "rimraf": "^2.6.2",
     "source-map-loader": "^0.2.3",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2",
