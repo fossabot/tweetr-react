@@ -35,7 +35,8 @@ export class Api extends Http {
     return status.user;
   }
 
-  public async signup() : Promise<User> {
-    throw new Error("");
+  public logout() {
+    this.session.token = "";
+    this.session.user = {} as any;
   }
 }

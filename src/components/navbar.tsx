@@ -25,6 +25,7 @@ export class Navbar extends React.Component<RoutedComponentProperties, any> {
   @autobind
   private logout() {
     this.api.logout();
+    this.props.history.push("/");
   }
 
   public render() {
