@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Landing } from "./landing";
+import { Layout } from "./layout";
 import { Login } from "./login";
 
 export class Tweetr extends React.Component {
@@ -15,6 +16,8 @@ export class Tweetr extends React.Component {
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
+
+          <Layout />
         </div>
       </Router>
     );
