@@ -67,4 +67,8 @@ export class Api extends Http {
   public async allTweets() {
     return await this.get<AllTweetsResponse>("/tweets");
   }
+
+  public async firehose() {
+    return await this.get<AllTweetsResponse>("/firehose");
+  }
 }

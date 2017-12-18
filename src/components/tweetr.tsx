@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Api } from "../api";
+import { Firehose } from "./firehose";
 import { Landing } from "./landing";
 import { Login } from "./login";
 import { Navbar } from "./navbar";
@@ -20,6 +21,7 @@ export class Tweetr extends React.Component {
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
           <Route path="/tweets" component={Tweets} />
+          <Route path="/firehose" component={Firehose} />
         </div>
       </Router>
     );
