@@ -79,7 +79,7 @@ export class Tweets extends React.Component<RoutedComponentProperties, TweetsSta
     ));
 
     return (
-      <Site history={this.props.history}>
+      <Site history={this.props.history} match={this.props.match}>
         <Compose onTweetCreated={this.addTweet} />
 
         <Loader active={this.state.isLoadingTweets}>Loading tweets</Loader>

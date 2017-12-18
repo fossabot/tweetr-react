@@ -56,7 +56,7 @@ export class Firehose extends React.Component<RoutedComponentProperties, Firehos
     ));
 
     return (
-      <Site history={this.props.history}>
+      <Site history={this.props.history} match={this.props.match}>
         <Loader active={this.state.isLoadingTweets}>Loading tweets</Loader>
         {tweets}
       </Site>

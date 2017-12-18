@@ -8,7 +8,7 @@ export class Site extends React.Component<RoutedComponentProperties, any> {
   public render() : JSX.Element {
     return (
       <>
-        <Navbar history={this.props.history} />
+        <Navbar history={this.props.history} match={this.props.match} />
 
         <Container className="site">
           {this.props.children}
