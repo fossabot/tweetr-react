@@ -10,14 +10,21 @@ interface TokenInformation {
 
 export class Authorization {
   public get token() : string {
-    const json = localStorage.getItem(TOKEN_STORAGE_KEY) as string,
-          info = JSON.parse(json) as TokenInformation;
+    const json = localStorage.getItem(TOKEN_STORAGE_KEY) as string;
 
-    if (new Date() > info.expireDate) {
-      return "";
+    if (json) {
+      const parsedJson = JSON.parse(json),
+            info: TokenInformation = {
+              expireDate: new Date(parsedJson.expireDate),
+              token: parsedJson.token,
+            };
+
+      if (new Date() <= info.expireDate) {
+        return info.token;
+      }
     }
 
-    return info.token;
+    return "";
   }
 
   public set token(value: string) {
