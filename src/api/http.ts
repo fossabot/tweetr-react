@@ -15,7 +15,7 @@ export class Http {
     this.authorization = new Authorization();
   }
 
-  public async get<T>(endpoint: string) : Promise<T> {
+  protected async get<T>(endpoint: string) : Promise<T> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
@@ -32,7 +32,7 @@ export class Http {
     return response.json();
   }
 
-  public async delete<T>(endpoint: string) : Promise<T> {
+  protected async delete<T>(endpoint: string) : Promise<T> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
@@ -49,7 +49,7 @@ export class Http {
     return response.json();
   }
 
-  public async post<TPayload, TResponse>(endpoint: string, payload: TPayload) : Promise<TResponse> {
+  protected async post<TPayload, TResponse>(endpoint: string, payload: TPayload) : Promise<TResponse> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
@@ -68,7 +68,7 @@ export class Http {
     return response.json();
   }
 
-  public async postForm<T>(endpoint: string, form: FormData) : Promise<T> {
+  protected async postForm<T>(endpoint: string, form: FormData) : Promise<T> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
