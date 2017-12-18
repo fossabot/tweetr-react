@@ -5,9 +5,11 @@ import {
   Route,
 } from "react-router-dom";
 
+import { Api } from "../api";
 import { Landing } from "./landing";
-import { Layout } from "./layout";
 import { Login } from "./login";
+import { Navbar } from "./navbar";
+import { Site } from "./site";
 
 export class Tweetr extends React.Component {
   public render() {
@@ -16,8 +18,6 @@ export class Tweetr extends React.Component {
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
-
-          <Layout />
         </div>
       </Router>
     );

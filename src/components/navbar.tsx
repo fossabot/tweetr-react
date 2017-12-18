@@ -1,3 +1,4 @@
+import autobind from "autobind-decorator";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
@@ -10,14 +11,20 @@ import {
 } from "semantic-ui-react";
 
 import { Api } from "../api";
+import { RoutedComponentProperties } from "./index";
 
-export class Navbar extends React.Component {
+export class Navbar extends React.Component<RoutedComponentProperties, any> {
   private readonly api: Api;
 
-  constructor(props: any) {
+  constructor(props: RoutedComponentProperties) {
     super(props);
 
     this.api = new Api();
+  }
+
+  @autobind
+  private logout() {
+    this.api.logout();
   }
 
   public render() {
@@ -66,10 +73,7 @@ export class Navbar extends React.Component {
                   </Link>
 
                   <Dropdown.Divider />
-
-                  <Link to="/logout">
-                    <Dropdown.Item>Logout</Dropdown.Item>
-                  </Link>
+                  <Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
           </Menu.Menu>
