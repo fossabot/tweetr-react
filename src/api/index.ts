@@ -7,15 +7,27 @@ export {
   User,
 };
 
+interface ApiResponse {
+  error: string;
+  message: string;
+}
+
 interface LoginPayload {
   handle: string;
   password: string;
 }
 
-interface LoginResponse {
-  error: string;
+interface LoginResponse extends ApiResponse {
   token: string;
   user: User;
+}
+
+interface CreateTweetResponse extends ApiResponse {
+  tweet: Tweet;
+}
+
+interface AllTweetsResponse extends ApiResponse {
+  tweets: Tweet[];
 }
 
 export class Api extends Http {
@@ -38,5 +50,21 @@ export class Api extends Http {
   public logout() {
     this.session.token = "";
     this.session.user = {} as any;
+  }
+
+  public async createTweet(message: string, image?: File) {
+    const data = new FormData();
+
+    data.append("message", message);
+
+    if (image) {
+      data.append("image", image);
+    }
+
+    return await this.postForm<CreateTweetResponse>("/tweets", data);
+  }
+
+  public async allTweets() {
+    return await this.get<AllTweetsResponse>("/tweets");
   }
 }

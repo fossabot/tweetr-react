@@ -10,6 +10,7 @@ import { Landing } from "./landing";
 import { Login } from "./login";
 import { Navbar } from "./navbar";
 import { Site } from "./site";
+import { Tweets } from "./tweets";
 
 export class Tweetr extends React.Component {
   public render() {
@@ -18,6 +19,7 @@ export class Tweetr extends React.Component {
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
+          <Route path="/tweets" component={Tweets} />
         </div>
       </Router>
     );
