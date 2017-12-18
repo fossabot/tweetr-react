@@ -15,13 +15,13 @@ export class Http {
     this.authorization = new Authorization();
   }
 
-  protected async get<T>(endpoint: string) : Promise<T> {
+  public async get<T>(endpoint: string) : Promise<T> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
 
-    if (this.authorization.isLoggedIn) {
-      headers.append("Authentication", `Bearer ${this.authorization.token}`);
+    if (this.authorization.token) {
+      headers.append("Authorization", `Bearer ${this.authorization.token}`);
     }
 
     const response = await fetch(`${this.location}${endpoint}`, {
@@ -32,14 +32,31 @@ export class Http {
     return response.json();
   }
 
-  protected async post<TPayload, TResponse>(endpoint: string, payload: TPayload) : Promise<TResponse> {
+  public async delete<T>(endpoint: string) : Promise<T> {
+    const headers = new Headers();
+
+    headers.append("Accept", "application/json");
+
+    if (this.authorization.token) {
+      headers.append("Authorization", `Bearer ${this.authorization.token}`);
+    }
+
+    const response = await fetch(`${this.location}${endpoint}`, {
+      headers,
+      method: "delete",
+    });
+
+    return response.json();
+  }
+
+  public async post<TPayload, TResponse>(endpoint: string, payload: TPayload) : Promise<TResponse> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
 
-    if (this.authorization.isLoggedIn) {
-      headers.append("Authentication", `Bearer ${this.authorization.token}`);
+    if (this.authorization.token) {
+      headers.append("Authorization", `Bearer ${this.authorization.token}`);
     }
 
     const response = await fetch(`${this.location}${endpoint}`, {
@@ -51,14 +68,13 @@ export class Http {
     return response.json();
   }
 
-  protected async postForm<T>(endpoint: string, form: FormData) : Promise<T> {
+  public async postForm<T>(endpoint: string, form: FormData) : Promise<T> {
     const headers = new Headers();
 
     headers.append("Accept", "application/json");
-    headers.append("Content-Type", "multipart/form-data");
 
-    if (this.authorization.isLoggedIn) {
-      headers.append("Authentication", `Bearer ${this.authorization.token}`);
+    if (this.authorization.token) {
+      headers.append("Authorization", `Bearer ${this.authorization.token}`);
     }
 
     const response = await fetch(`${this.location}${endpoint}`, {
