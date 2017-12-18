@@ -64,6 +64,10 @@ export class Api extends Http {
     return await this.postForm<CreateTweetResponse>("/tweets", data);
   }
 
+  public async deleteTweet(tweet: Tweet) {
+    return await this.delete(`/tweets/${tweet._id}`);
+  }
+
   public async allTweets() {
     return await this.get<AllTweetsResponse>("/tweets");
   }

@@ -10,7 +10,11 @@ import {
 import { Compose } from "./compose";
 import { RoutedComponentProperties } from "./index";
 import { Site } from "./site";
-import { Tweet } from "./tweet";
+
+import {
+  Tweet,
+  TweetDeleteMode,
+} from "./tweet";
 
 interface FirehoseState {
   isLoadingTweets: boolean;
@@ -44,21 +48,12 @@ export class Firehose extends React.Component<RoutedComponentProperties, Firehos
   }
 
   public render() {
-    const tweets = this.state.tweets.map((t) => {
-      let image = (<div />);
-
-      if (t.imageUrl) {
-        image = (<img src={t.imageUrl} />);
-      }
-
-      return (
-        <Tweet user={t.user}>
-          <p>{t.message}</p>
-
-          {image}
-        </Tweet>
-      );
-    });
+    const tweets = this.state.tweets.map((t) => (
+      <Tweet
+        tweet={t}
+        deleteMode={TweetDeleteMode.None}
+      />
+    ));
 
     return (
       <Site history={this.props.history}>

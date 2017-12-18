@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export interface Tweet {
-  id: string;
+  _id: string;
   message: string;
   imageUrl: string;
   time: Date;

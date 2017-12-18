@@ -10,7 +10,11 @@ import {
 import { Compose } from "./compose";
 import { RoutedComponentProperties } from "./index";
 import { Site } from "./site";
-import { Tweet } from "./tweet";
+
+import {
+  Tweet,
+  TweetDeleteMode,
+} from "./tweet";
 
 interface TweetsState {
   isLoadingTweets: boolean;
@@ -54,22 +58,25 @@ export class Tweets extends React.Component<RoutedComponentProperties, TweetsSta
     });
   }
 
-  public render() {
-    const tweets = this.state.tweets.map((t) => {
-      let image = (<div />);
+  @autobind
+  private async deleteTweet(tweet: TweetModel) {
+    await this.api.deleteTweet(tweet);
 
-      if (t.imageUrl) {
-        image = (<img src={t.imageUrl} />);
-      }
-
-      return (
-        <Tweet user={t.user}>
-          <p>{t.message}</p>
-
-          {image}
-        </Tweet>
-      );
+    this.setState({
+      tweets: this.state
+                  .tweets
+                  .filter((t) => t._id !== tweet._id),
     });
+  }
+
+  public render() {
+    const tweets = this.state.tweets.map((t) => (
+      <Tweet
+        tweet={t}
+        deleteMode={TweetDeleteMode.Single}
+        onDelete={() => this.deleteTweet(t)}
+      />
+    ));
 
     return (
       <Site history={this.props.history}>
