@@ -70,19 +70,21 @@ export class Compose extends React.Component<ComposeProperties, ComposeState> {
 
   @autobind
   private async createTweet() {
-    this.beginApiCall();
+    if (!this.state.isCreating) {
+      this.beginApiCall();
 
-    const response = await this.api.createTweet(this.state.message, this.state.image);
+      const response = await this.api.createTweet(this.state.message, this.state.image);
 
-    if (response.message) {
-      this.setState({
-        error: response.message,
-      });
-    } else {
-      this.props.onTweetCreated(response.tweet);
+      if (response.message) {
+        this.setState({
+          error: response.message,
+        });
+      } else {
+        this.props.onTweetCreated(response.tweet);
+      }
+
+      this.endApiCall();
     }
-
-    this.endApiCall();
   }
 
   @autobind
