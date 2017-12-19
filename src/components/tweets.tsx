@@ -70,13 +70,19 @@ export class Tweets extends React.Component<RoutedComponentProperties, TweetsSta
   }
 
   public render() {
-    const tweets = this.state.tweets.map((t) => (
-      <Tweet
-        tweet={t}
-        deleteMode={TweetDeleteMode.Single}
-        onDelete={() => this.deleteTweet(t)}
-      />
-    ));
+    const tweets = this.state.tweets.map((t) => {
+      const user = this.api.session.loggedInUser,
+            isOwner = t.user.handle === this.api.session.loggedInUser.handle,
+            deleteMode = isOwner ? TweetDeleteMode.Single : TweetDeleteMode.None;
+
+      return (
+        <Tweet
+          tweet={t}
+          deleteMode={deleteMode}
+          onDelete={() => this.deleteTweet(t)}
+        />
+      );
+    });
 
     return (
       <Site history={this.props.history} match={this.props.match}>
