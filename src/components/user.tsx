@@ -19,9 +19,11 @@ import {
   User as UserModel,
 } from "../api";
 
+import { FollowButton } from "./follow-button";
 import { RoutedComponentProperties } from "./index";
 import { Person } from "./person";
 import { Site } from "./site";
+
 import {
   Tweet,
   TweetDeleteMode,
@@ -83,6 +85,15 @@ export class User extends React.Component<UserProperties, UserState> {
     }
   }
 
+  @autobind
+  private async updateGraph() {
+    const response = await this.api.viewUser(this.props.match.params.handle as string);
+
+    this.setState({
+      graph: response.socialGraph,
+    });
+  }
+
   public render() {
     let user = (<></>);
 
@@ -107,6 +118,9 @@ export class User extends React.Component<UserProperties, UserState> {
               <GridColumn width="12">
                 <h1>{this.state.user.name}</h1>
                 <div className="muted text">@{this.state.user.handle}</div>
+              </GridColumn>
+              <GridColumn width="4">
+                <FollowButton user={this.api.session.loggedInUser} target={this.state.user} onFollowingChanged={this.updateGraph} />
               </GridColumn>
             </Grid>
 

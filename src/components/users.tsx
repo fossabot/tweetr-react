@@ -15,6 +15,7 @@ import {
   User,
 } from "../api";
 
+import { FollowButton } from "./follow-button";
 import { RoutedComponentProperties } from "./index";
 import { Person } from "./person";
 import { Site } from "./site";
@@ -75,6 +76,7 @@ export class Users extends React.Component<RoutedComponentProperties, UsersState
                           </GridColumn>
 
                           <GridColumn width="4">
+                            <FollowButton user={this.api.session.loggedInUser} target={u} />
                           </GridColumn>
                         </>
                       ));

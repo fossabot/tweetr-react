@@ -94,4 +94,12 @@ export class Api extends Http {
   public async viewUser(handle: string) {
     return await this.get<ViewUserResponse>(`/users/${handle}`);
   }
+
+  public async followUser(user: User) {
+    return await this.post(`/follow/${user.handle}`, {});
+  }
+
+  public async unfollowUser(user: User) {
+    return await this.delete(`/follow/${user.handle}`);
+  }
 }
