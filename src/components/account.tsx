@@ -84,10 +84,20 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
     });
 
     try {
-      await this.api.updateAccount(this.state.name, this.state.image, this.state.password1, this.state.password2);
+      if ((this.state.password1 || this.state.password2) && this.state.password1 !== this.state.password2) {
+        throw new Error("passwords don't match");
+      }
+
+      await this.api.updateAccount(this.state.name, this.state.image, this.state.password1);
 
       const updatedUserInfo = await this.api.viewUser(this.api.session.loggedInUser.handle);
       this.api.session.user = updatedUserInfo.user;
+
+      this.setState({
+        error: "",
+        password1: "",
+        password2: "",
+      });
     } catch (error) {
       this.setState({
         error: error.message,
