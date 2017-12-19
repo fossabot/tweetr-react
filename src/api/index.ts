@@ -2,6 +2,7 @@ import { SocialGraphDescription } from "../components/social-graph";
 import { Http } from "./http";
 import { Tweet } from "./tweet";
 import { User } from "./user";
+import { Authorization } from './authorization';
 
 export {
   Tweet,
@@ -41,16 +42,62 @@ interface ViewUserResponse extends ApiResponse {
   user: User;
 }
 
-export class Api extends Http {
+export class Api {
+  private readonly http: Http;
+
+  public get session() : Authorization {
+    return this.http.session;
+  }
+
+  constructor() {
+    this.http = new Http();
+  }
+
+  private async get<TResponse extends ApiResponse>(endpoint: string) : Promise<TResponse> {
+    const response = await this.http.get<TResponse>(endpoint);
+
+    if (response.error) {
+      throw new Error(response.message);
+    }
+
+    return response;
+  }
+
+  private async delete<TResponse extends ApiResponse>(endpoint: string) : Promise<TResponse> {
+    const response = await this.http.delete<TResponse>(endpoint);
+
+    if (response.error) {
+      throw new Error(response.message);
+    }
+
+    return response;
+  }
+
+  private async post<TPayload, TResponse extends ApiResponse>(endpoint: string, payload: TPayload) : Promise<TResponse> {
+    const response = await this.http.post<TPayload, TResponse>(endpoint, payload);
+
+    if (response.error) {
+      throw new Error(response.message);
+    }
+
+    return response;
+  }
+
+  private async postForm<TResponse extends ApiResponse>(endpoint: string, form: FormData) : Promise<TResponse> {
+    const response = await this.http.postForm<TResponse>(endpoint, form);
+
+    if (response.error) {
+      throw new Error(response.message);
+    }
+
+    return response;
+  }
+
   public async login(handle: string, password: string) : Promise<User> {
     const status = await this.post<LoginPayload, LoginResponse>("/login", {
       handle,
       password,
     });
-
-    if (status.error) {
-      throw new Error(status.error);
-    }
 
     this.session.token = status.token;
     this.session.user = status.user;
@@ -103,7 +150,7 @@ export class Api extends Http {
     return await this.delete(`/follow/${user.handle}`);
   }
 
-  public async updateAccount(name?: string, image?: File, password1?: string, password2?: string) {
+  public async updateAccount(name?: string, image?: File, password?: string) {
     const data = new FormData();
 
     if (name) {
@@ -114,12 +161,8 @@ export class Api extends Http {
       data.append("image", image);
     }
 
-    if (password1) {
-      data.append("password", password1);
-    }
-
-    if (password2) {
-      data.append("password_confirmation", password2);
+    if (password) {
+      data.append("password", password);
     }
 
     return await this.postForm<ApiResponse>("/account", data);
