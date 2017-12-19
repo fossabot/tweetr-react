@@ -19,22 +19,16 @@ import { RoutedComponentProperties } from "./index";
 import { Person } from "./person";
 import { Site } from "./site";
 
-interface UsersRouteMatch {
-  handle?: string;
-}
-
-type UsersProperties = RoutedComponentProperties<UsersRouteMatch>;
-
 interface UsersState {
   isLoadingUsers: boolean;
   searchQuery: string;
   users: User[];
 }
 
-export class Users extends React.Component<UsersProperties, UsersState> {
+export class Users extends React.Component<RoutedComponentProperties, UsersState> {
   private readonly api: Api;
 
-  constructor(props: UsersProperties) {
+  constructor(props: RoutedComponentProperties) {
     super(props);
 
     this.api = new Api();
