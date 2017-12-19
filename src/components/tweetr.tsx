@@ -12,6 +12,7 @@ import { Login } from "./login";
 import { Navbar } from "./navbar";
 import { Site } from "./site";
 import { Tweets } from "./tweets";
+import { User } from "./user";
 import { Users } from "./users";
 
 export class Tweetr extends React.Component {
@@ -24,6 +25,7 @@ export class Tweetr extends React.Component {
           <Route path="/tweets" component={Tweets} />
           <Route path="/firehose" component={Firehose} />
           <Route exact path="/users" component={Users} />
+          <Route path="/users/:handle" component={User} />
         </div>
       </Router>
     );

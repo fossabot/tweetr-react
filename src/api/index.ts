@@ -1,3 +1,4 @@
+import { SocialGraphDescription } from "../components/social-graph";
 import { Http } from "./http";
 import { Tweet } from "./tweet";
 import { User } from "./user";
@@ -32,6 +33,12 @@ interface AllTweetsResponse extends ApiResponse {
 
 interface AllUsersResponse extends ApiResponse {
   users: User[];
+}
+
+interface ViewUserResponse extends ApiResponse {
+  socialGraph: SocialGraphDescription;
+  tweets: Tweet[];
+  user: User;
 }
 
 export class Api extends Http {
@@ -82,5 +89,9 @@ export class Api extends Http {
 
   public async allUsers() {
     return await this.get<AllUsersResponse>("/users");
+  }
+
+  public async viewUser(handle: string) {
+    return await this.get<ViewUserResponse>(`/users/${handle}`);
   }
 }
