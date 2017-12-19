@@ -30,6 +30,10 @@ interface AllTweetsResponse extends ApiResponse {
   tweets: Tweet[];
 }
 
+interface AllUsersResponse extends ApiResponse {
+  users: User[];
+}
+
 export class Api extends Http {
   public async login(handle: string, password: string) : Promise<User> {
     const status = await this.post<LoginPayload, LoginResponse>("/login", {
@@ -74,5 +78,9 @@ export class Api extends Http {
 
   public async firehose() {
     return await this.get<AllTweetsResponse>("/firehose");
+  }
+
+  public async allUsers() {
+    return await this.get<AllUsersResponse>("/users");
   }
 }
