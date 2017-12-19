@@ -117,16 +117,6 @@ export class SocialGraph extends React.Component<SocialGraphProperties, any> {
         resetTextClasses();
       };
     }
-
-    // $circles.mouseenter(function () {
-    //   $labels.removeClass("active");
-
-    //   var index = $circles.index(this),
-    //       $label = $($labels.get(index));
-
-    //   $label.addClass("active");
-    // });
-
   }
 
   public render() {
