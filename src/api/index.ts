@@ -102,4 +102,30 @@ export class Api extends Http {
   public async unfollowUser(user: User) {
     return await this.delete(`/follow/${user.handle}`);
   }
+
+  public async updateAccount(name?: string, image?: File, password1?: string, password2?: string) {
+    const data = new FormData();
+
+    if (name) {
+      data.append("name", name);
+    }
+
+    if (image) {
+      data.append("image", image);
+    }
+
+    if (password1) {
+      data.append("password", password1);
+    }
+
+    if (password2) {
+      data.append("password_confirmation", password2);
+    }
+
+    return await this.postForm<ApiResponse>("/account", data);
+  }
+
+  public async purgeTweets() {
+    return await this.delete<ApiResponse>("/account/tweets");
+  }
 }

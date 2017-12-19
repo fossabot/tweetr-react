@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Api } from "../api";
+import { Account } from "./account";
 import { Firehose } from "./firehose";
 import { Landing } from "./landing";
 import { Login } from "./login";
@@ -26,6 +27,7 @@ export class Tweetr extends React.Component {
           <Route path="/firehose" component={Firehose} />
           <Route exact path="/users" component={Users} />
           <Route path="/users/:handle" component={User} />
+          <Route path="/account" component={Account} />
         </div>
       </Router>
     );
