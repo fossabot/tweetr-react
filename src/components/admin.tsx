@@ -228,6 +228,13 @@ export class Admin extends React.Component<RoutedComponentProperties, AdminState
               <Divider hidden />
 
               <Segment>
+                <h1>Add user</h1>
+                <SignupForm onSignup={this.userAdded} />
+              </Segment>
+
+              <Divider hidden />
+
+              <Segment>
                 <h1>Users</h1>
 
                 {users}
