@@ -1,5 +1,6 @@
 import autobind from "autobind-decorator";
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Button,
@@ -114,6 +115,11 @@ export class Login extends React.Component<RoutedComponentProperties, LoginState
             </Button>
           </Form>
         </Segment>
+
+        <Divider horizontal>New here?</Divider>
+        <Link to="/signup">
+          <Button fluid color="grey">Sign up for tweetr</Button>
+        </Link>
       </Container>
     );
   }

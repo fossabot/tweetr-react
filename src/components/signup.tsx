@@ -1,7 +1,10 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 import {
+  Button,
   Container,
+  Divider,
   Segment,
 } from "semantic-ui-react";
 
@@ -16,6 +19,11 @@ export class Signup extends React.Component<RoutedComponentProperties, any> {
         <Segment>
           <SignupForm onSignup={() => this.props.history.push("/login")} />
         </Segment>
+
+        <Divider horizontal>Already have an account?</Divider>
+        <Link to="/login">
+          <Button fluid color="grey">Login to tweetr</Button>
+        </Link>
       </Container>
     );
   }
