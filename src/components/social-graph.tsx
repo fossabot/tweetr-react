@@ -99,7 +99,9 @@ export class SocialGraph extends React.Component<SocialGraphProperties, any> {
           texts = this.svg.querySelectorAll(".labels text");
 
     function resetTextClasses() {
-      for (const text of texts) {
+      for (let i = 0; i < texts.length; i++) {
+        const text = texts.item(i);
+
         text.classList.remove("active");
       }
     }
