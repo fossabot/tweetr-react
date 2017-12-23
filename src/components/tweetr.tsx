@@ -21,7 +21,7 @@ import { Users } from "./users";
 export class Tweetr extends React.Component {
   public render() {
     return (
-      <Router>
+      <Router basename="/tweetr-react">
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />

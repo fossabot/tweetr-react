@@ -1,6 +1,6 @@
 {
   "name": "tweetr-react",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "a react frontend to the tweetr api",
   "main": "index.js",
   "repository": "git@github.com:michaelneu/tweetr-react.git",
