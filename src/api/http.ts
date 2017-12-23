@@ -7,8 +7,12 @@ export class Http {
     return this.authorization;
   }
 
+  public get server() : string {
+    return "https://tweetr-us-west-1.herokuapp.com";
+  }
+
   private get location() : string {
-    return "https://tweetr-us-west-1.herokuapp.com/api";
+    return `${this.server}/api`;
   }
 
   constructor() {
