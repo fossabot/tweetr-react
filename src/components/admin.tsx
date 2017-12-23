@@ -61,7 +61,7 @@ export class Admin extends React.Component<RoutedComponentProperties, AdminState
   }
 
   public async componentWillMount() {
-    const { tweets } = await this.api.allTweets(),
+    const { tweets } = await this.api.firehose(),
           { users } = await this.api.allUsers();
 
     this.setState({

@@ -155,7 +155,7 @@ export class Api {
   }
 
   public async allTweets() {
-    return await this.get<AllTweetsResponse>("/firehose");
+    return await this.get<AllTweetsResponse>("/tweets");
   }
 
   public async firehose() {
