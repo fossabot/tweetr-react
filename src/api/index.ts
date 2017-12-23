@@ -1,12 +1,17 @@
 import { SocialGraphDescription } from "../components/social-graph";
+import { Authorization } from "./authorization";
 import { Http } from "./http";
 import { Tweet } from "./tweet";
-import { User } from "./user";
-import { Authorization } from './authorization';
+
+import {
+  User,
+  UserRole,
+} from "./user";
 
 export {
   Tweet,
   User,
+  UserRole,
 };
 
 interface ApiResponse {
@@ -126,8 +131,16 @@ export class Api {
     return await this.delete(`/tweets/${tweet._id}`);
   }
 
+  public async deleteTweets(tweets: Tweet[]) {
+    const pool = tweets.map((t) => this.deleteTweet(t));
+
+    for (const worker of pool) {
+      await worker;
+    }
+  }
+
   public async allTweets() {
-    return await this.get<AllTweetsResponse>("/tweets");
+    return await this.get<AllTweetsResponse>("/firehose");
   }
 
   public async firehose() {
@@ -170,5 +183,17 @@ export class Api {
 
   public async purgeTweets() {
     return await this.delete<ApiResponse>("/account/tweets");
+  }
+
+  public async promoteToAdmin(user: User) {
+    return await this.post<any, ApiResponse>(`/admin/${user.handle}`, {});
+  }
+
+  public async degradeToUser(user: User) {
+    return await this.delete<ApiResponse>(`/admin/${user.handle}`);
+  }
+
+  public async removeUser(user: User) {
+    return await this.delete<ApiResponse>(`/users/${user.handle}`);
   }
 }
