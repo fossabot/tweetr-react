@@ -19,6 +19,10 @@ interface ApiResponse {
   message: string;
 }
 
+interface SignupResponse extends ApiResponse {
+  user: User;
+}
+
 interface LoginPayload {
   handle: string;
   password: string;
@@ -96,6 +100,17 @@ export class Api {
     }
 
     return response;
+  }
+
+  public async signup(handle: string, name: string, password: string, image: File) : Promise<SignupResponse> {
+    const data = new FormData();
+
+    data.append("handle", handle);
+    data.append("name", name);
+    data.append("password", password);
+    data.append("image", image);
+
+    return await this.postForm<SignupResponse>("/signup", data);
   }
 
   public async login(handle: string, password: string) : Promise<User> {

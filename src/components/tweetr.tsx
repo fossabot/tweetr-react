@@ -12,6 +12,7 @@ import { Firehose } from "./firehose";
 import { Landing } from "./landing";
 import { Login } from "./login";
 import { Navbar } from "./navbar";
+import { Signup } from "./signup";
 import { Site } from "./site";
 import { Tweets } from "./tweets";
 import { User } from "./user";
@@ -30,6 +31,7 @@ export class Tweetr extends React.Component {
           <Route path="/users/:handle" component={User} />
           <Route path="/account" component={Account} />
           <Route path="/administration" component={Admin} />
+          <Route path="/signup" component={Signup} />
         </div>
       </Router>
     );
