@@ -63,7 +63,9 @@ export class Api {
   }
 
   public async ping() {
-    await this.http.get(this.http.server);
+    await fetch(this.http.server, {
+      method: "get",
+    });
   }
 
   private async get<TResponse extends ApiResponse>(endpoint: string) : Promise<TResponse> {
