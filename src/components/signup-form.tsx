@@ -11,7 +11,7 @@ import {
   Api,
   User,
 } from "../api";
-import { MessageBox } from './messagebox';
+import { MessageBox } from "./messagebox";
 
 interface SignupFormProperties {
   onSignup(user: User) : void;
