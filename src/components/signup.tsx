@@ -17,6 +17,9 @@ export class Signup extends React.Component<RoutedComponentProperties, any> {
     return (
       <Container className="signup">
         <Segment>
+          <h1>New here? <span className="muted text">Register</span></h1>
+          <p>Before you can start telling the world what you're thinking about, we need some basic information from you.</p>
+
           <SignupForm onSignup={() => this.props.history.push("/login")} />
         </Segment>
 
