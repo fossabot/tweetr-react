@@ -184,8 +184,12 @@ export class Api {
     return await this.delete(`/follow/${user.handle}`);
   }
 
-  public async updateAccount(name?: string, image?: File, password?: string) {
+  public async updateAccount(handle?: string, name?: string, image?: File, password?: string) {
     const data = new FormData();
+
+    if (handle) {
+      data.append("handle", handle);
+    }
 
     if (name) {
       data.append("name", name);

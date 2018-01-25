@@ -19,6 +19,7 @@ interface AccountState {
   error: string;
   image?: File;
   name: string;
+  handle: string;
   password1: string;
   password2: string;
 
@@ -36,6 +37,7 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
     this.api = new Api();
     this.state = {
       error: "",
+      handle: this.api.session.loggedInUser.handle,
       name: this.api.session.loggedInUser.name,
       password1: "",
       password2: "",
@@ -44,6 +46,13 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
       isPurging: false,
       isUpdatingAccount: false,
     };
+  }
+
+  @autobind
+  private inputHandle(event: any) {
+    this.setState({
+      handle: event.target.value,
+    });
   }
 
   @autobind
@@ -88,9 +97,16 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
         throw new Error("passwords don't match");
       }
 
-      await this.api.updateAccount(this.state.name, this.state.image, this.state.password1);
+      await this.api.updateAccount(this.state.handle, this.state.name, this.state.image, this.state.password1);
 
-      const updatedUserInfo = await this.api.viewUser(this.api.session.loggedInUser.handle);
+      const loggedInUser = this.api.session.loggedInUser;
+
+      if (loggedInUser.handle !== this.state.handle) {
+        loggedInUser.handle = this.state.handle;
+        this.api.session.user = loggedInUser;
+      }
+
+      const updatedUserInfo = await this.api.viewUser(loggedInUser.handle);
       this.api.session.user = updatedUserInfo.user;
 
       this.setState({
@@ -132,6 +148,14 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
           <MessageBox error message={this.state.error} />
 
           <Form onSubmit={this.updateAccount} enctype="multipart/form-data">
+            <Form.Field>
+              <label>Change your handle</label>
+              <div className="ui fluid labeled input">
+                <div className="ui label">@</div>
+                <input type="text" onChange={this.inputHandle} value={this.state.handle} />
+              </div>
+            </Form.Field>
+
             <Form.Field>
               <label>Change your name</label>
               <div className="ui fluid labeled input">
