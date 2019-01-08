@@ -65,7 +65,7 @@ export class Account extends React.Component<RoutedComponentProperties, AccountS
   @autobind
   private uploadFile(event: any) {
     const files: FileList = event.target.files,
-          image = files.item(0);
+          image = files.item(0)!;
 
     this.setState({
       image,

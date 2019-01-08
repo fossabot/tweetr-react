@@ -33,7 +33,7 @@ interface ComposeState {
 
 export class Compose extends React.Component<ComposeProperties, ComposeState> {
   private readonly api: Api;
-  private imageInput: HTMLInputElement;
+  private imageInput?: HTMLInputElement;
 
   constructor(props: ComposeProperties) {
     super(props);
@@ -58,7 +58,7 @@ export class Compose extends React.Component<ComposeProperties, ComposeState> {
       message: "",
     });
 
-    this.imageInput.value = "";
+    this.imageInput!.value = "";
   }
 
   private endApiCall() {
@@ -96,7 +96,7 @@ export class Compose extends React.Component<ComposeProperties, ComposeState> {
   @autobind
   private uploadFile(event: any) {
     const files: FileList = event.target.files,
-          image = files.item(0);
+          image = files.item(0)!;
 
     this.setState({
       image,

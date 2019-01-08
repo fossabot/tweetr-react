@@ -25,8 +25,8 @@ interface SocialGraphProperties {
 }
 
 export class SocialGraph extends React.Component<SocialGraphProperties, any> {
-  private container: HTMLDivElement;
-  private svg: SVGSVGElement;
+  private container?: HTMLDivElement;
+  private svg?: SVGSVGElement;
 
   private width: number;
   private height: number;
@@ -41,8 +41,8 @@ export class SocialGraph extends React.Component<SocialGraphProperties, any> {
   public componentDidMount() {
     // adapted from https://bl.ocks.org/mbostock/4062045
     const circleRadius = 5,
-          width = this.container.clientWidth,
-          height = this.container.clientHeight,
+          width = this.container!.clientWidth,
+          height = this.container!.clientHeight,
           forceLinkName = "link",
           svg = d3.select("svg")
                   .attr("width", "100%")
@@ -95,8 +95,8 @@ export class SocialGraph extends React.Component<SocialGraphProperties, any> {
 
     force.links(this.props.graph.links);
 
-    const circles = this.svg.querySelectorAll(".nodes circle"),
-          texts = this.svg.querySelectorAll(".labels text");
+    const circles = this.svg!.querySelectorAll(".nodes circle"),
+          texts = this.svg!.querySelectorAll(".labels text");
 
     function resetTextClasses() {
       for (let i = 0; i < texts.length; i++) {

@@ -28,7 +28,7 @@ interface SignupFormState {
 
 export class SignupForm extends React.Component<SignupFormProperties, SignupFormState> {
   private readonly api: Api;
-  private imageInput: HTMLInputElement;
+  private imageInput?: HTMLInputElement;
 
   constructor(props: SignupFormProperties) {
     super(props);
@@ -68,7 +68,7 @@ export class SignupForm extends React.Component<SignupFormProperties, SignupForm
   @autobind
   private uploadFile(event: any) {
     const files: FileList = event.target.files,
-          image = files.item(0);
+          image = files.item(0)!;
 
     this.setState({
       image,
@@ -84,7 +84,7 @@ export class SignupForm extends React.Component<SignupFormProperties, SignupForm
     try {
       const response = await this.api.signup(this.state.handle, this.state.name, this.state.password, this.state.image);
 
-      this.imageInput.value = "";
+      this.imageInput!.value = "";
       this.setState({
         handle: "",
         isSigningUp: false,
