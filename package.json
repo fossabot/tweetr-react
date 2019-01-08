@@ -10,6 +10,7 @@
     "start": "webpack-dev-server --hot",
     "build": "webpack -p",
     "lint": "tslint --project .",
+    "test": "exit 0",
     "clean": "rimraf dist/"
   },
   "devDependencies": {
