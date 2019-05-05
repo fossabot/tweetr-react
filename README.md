@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/michaelneu/tweetr-react.svg?branch=master)](https://travis-ci.org/michaelneu/tweetr-react)
 [![GitHub license](https://img.shields.io/github/license/michaelneu/tweetr-react.svg)](https://github.com/michaelneu/tweetr-react/LICENSE)
 [![GitHub tag](https://img.shields.io/github/tag/michaelneu/tweetr-react.svg)](https://github.com/michaelneu/tweetr-react)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmichaelneu%2Ftweetr-react.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmichaelneu%2Ftweetr-react?ref=badge_shield)
 
 tweetr-react is a React frontend to the [tweetr](https://github.com/michaelneu/tweetr) api, a small Twitter-like application for the node.js webdev course at the OTH Regensburg by [Eamonn de Leastar](https://github.com/edeleastar).
 
@@ -29,3 +30,6 @@ $ yarn build   # bundle
 ## License
 
 tweetr-react is released under the [MIT license](LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmichaelneu%2Ftweetr-react.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmichaelneu%2Ftweetr-react?ref=badge_large)
